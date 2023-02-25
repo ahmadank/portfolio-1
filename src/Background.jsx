@@ -4,6 +4,7 @@ import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { FilmPass } from "three/addons/postprocessing/FilmPass.js";
 import { GlitchPass } from "../threeAddOns/GlitchPass.js";
+import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
 
 import styles from "./background.module.css";
 
@@ -44,7 +45,9 @@ function Background() {
     );
     camera.position.z = 50;
     scene.add(camera);
-
+    scene.add(new THREE.AmbientLight(0x404040));
+    const pointLight = new THREE.PointLight(0x3f7b9d, 5);
+    camera.add(pointLight);
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
       antialias: true,
@@ -53,16 +56,25 @@ function Background() {
     renderer.setSize(sizes.width, sizes.height);
     const composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
-    const filmPass = new FilmPass();
+    const filmPass = new FilmPass(1, 1, 2048, false);
     const glitchPass = new GlitchPass();
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      1.5,
+      0.4,
+      0.85
+    );
+    composer.addPass(bloomPass);
 
     composer.addPass(glitchPass);
-    composer.addPass(filmPass);
+    // composer.addPass(filmPass);
 
     const createPoints = () => {
       geometry = new THREE.BufferGeometry();
       material = new THREE.PointsMaterial({
-        color: color.setHex(Math.random() * 0xffffff),
+        // color: color.setHex(Math.random() * 0xffffff),
+        color: color.setHSL(Math.random(), 0.7, Math.random() * 0.2 + 0.05),
+
         size: 3.5,
         sizeAttenuation: false,
       });
@@ -109,7 +121,10 @@ function Background() {
       const tubeLength = 40;
       const numCapsules = 100;
       const geometry = new THREE.CapsuleGeometry(0.05, 30, 15, 8);
-      const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+      const material = new THREE.MeshStandardMaterial({
+        color: 0x3f7b9d,
+        side: THREE.DoubleSide,
+      });
       capsuleMesh = new THREE.InstancedMesh(geometry, material, 100);
       scene.add(capsuleMesh);
       for (let i = 0; i < numCapsules; i++) {
@@ -186,7 +201,8 @@ function Background() {
     const updatetrailColor = () => {
       colorChangeCounter++;
       if (colorChangeCounter >= 150) {
-        color.setHex(Math.random() * 0xffffff);
+        // color.setHex(Math.random() * 0xffffff);
+        color.setHex(0xffffff);
         material.color = color;
         colorChangeCounter = 0;
       }
