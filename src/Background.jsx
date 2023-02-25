@@ -1,5 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { FilmPass } from "three/addons/postprocessing/FilmPass.js";
+import { GlitchPass } from "../threeAddOns/GlitchPass.js";
+
 import styles from "./background.module.css";
 
 const setPosition = (array) => {
@@ -20,7 +25,7 @@ function Background() {
   const canvasRef = useRef();
   let mouse = new THREE.Vector3(0, 0, 1);
   let colorChangeCounter = 0;
-  let octa, geometry, material, positions;
+  let capsuleMesh, geometry, material, positions;
   const dummy = new THREE.Object3D();
   const color = new THREE.Color();
   const matrix = new THREE.Matrix4();
@@ -37,7 +42,7 @@ function Background() {
       0.1,
       100
     );
-    camera.position.z = 30;
+    camera.position.z = 50;
     scene.add(camera);
 
     const renderer = new THREE.WebGLRenderer({
@@ -46,6 +51,13 @@ function Background() {
     });
     renderer.setClearColor(0x000000, 0);
     renderer.setSize(sizes.width, sizes.height);
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    const filmPass = new FilmPass();
+    const glitchPass = new GlitchPass();
+
+    composer.addPass(glitchPass);
+    composer.addPass(filmPass);
 
     const createPoints = () => {
       geometry = new THREE.BufferGeometry();
@@ -91,41 +103,53 @@ function Background() {
       geometry.attributes.position.needsUpdate = true;
     });
 
-    const addOcta = () => {
-      const geometry = new THREE.TetrahedronGeometry(1);
-      const material = new THREE.MeshNormalMaterial();
-      octa = new THREE.InstancedMesh(geometry, material, 100);
-      scene.add(octa);
-      octa.position.z = -2;
-      octa.position.x = -10;
-      octa.position.y = -2;
-      for (let i = 0; i < 40; ++i) {
-        dummy.position.x = Math.random() * 40 - 2;
-        dummy.position.y = Math.random() * 40 - 2;
-        dummy.position.z = Math.random() * 40 - 2;
+    const addcapsuleMesh = () => {
+      const outerRadius = 50;
+      const innerRadius = 20;
+      const tubeLength = 40;
+      const numCapsules = 100;
+      const geometry = new THREE.CapsuleGeometry(0.05, 30, 15, 8);
+      const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+      capsuleMesh = new THREE.InstancedMesh(geometry, material, 100);
+      scene.add(capsuleMesh);
+      for (let i = 0; i < numCapsules; i++) {
+        const angle = (i / numCapsules) * Math.PI * 2;
+        const x = ((outerRadius + innerRadius) / 2) * Math.cos(angle);
+        const y = ((outerRadius + innerRadius) / 2) * Math.sin(angle);
+        const z = -25 + (tubeLength / 2) * (Math.random() - 0.5);
+        const position = new THREE.Vector3(x, y, z);
 
-        dummy.rotation.x = Math.random() * 2 - Math.PI;
-        dummy.rotation.y = Math.random() * 2 - Math.PI;
-        dummy.rotation.z = Math.random() * 2 - Math.PI;
+        const direction = new THREE.Vector3()
+          .subVectors(camera.position, position)
+          .normalize();
+        const quaternion = new THREE.Quaternion().setFromUnitVectors(
+          new THREE.Vector3(0, 0, 0),
+          direction
+        );
 
-        dummy.updateMatrix();
-        octa.setMatrixAt(i, dummy.matrix);
+        capsuleMesh.setMatrixAt(
+          i,
+          new THREE.Matrix4()
+            .makeRotationFromQuaternion(quaternion)
+            .setPosition(position)
+        );
       }
+      capsuleMesh.rotateX(40);
     };
 
     const animate = () => {
       const time = Date.now();
       for (let i = 0; i < 40; ++i) {
-        octa.getMatrixAt(i, matrix);
+        capsuleMesh.getMatrixAt(i, matrix);
         matrix.decompose(dummy.position, dummy.rotation, dummy.scale);
-        dummy.rotation.x = (i / 100000) * time;
-        dummy.rotation.y = (i / 100000) * time;
-        dummy.rotation.z = (i / 100000) * time;
-
+        dummy.position.x += 0.001;
+        // dummy.position.y = (i / 100000) * time;
+        // dummy.position.y += 0.002;
         dummy.updateMatrix();
-        octa.setMatrixAt(i, dummy.matrix);
+        capsuleMesh.setMatrixAt(i, dummy.matrix);
+        // capsuleMesh.lookAt(camera);
       }
-      octa.instanceMatrix.needsUpdate = true;
+      capsuleMesh.instanceMatrix.needsUpdate = true;
     };
 
     const updatePoint = () => {
@@ -167,15 +191,16 @@ function Background() {
         colorChangeCounter = 0;
       }
     };
+
     const render = () => {
-      renderer.render(scene, camera);
+      composer.render();
       updatetrailColor();
       updatePoint();
       animate();
       window.requestAnimationFrame(render);
     };
     createPoints();
-    addOcta();
+    addcapsuleMesh();
     render();
 
     const doc = document.getElementsByClassName("App")[0];
