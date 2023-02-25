@@ -1,0 +1,15 @@
+.sideContainer {
+  width: 5%;
+  margin-left: 1%;
+  max-width: 30px;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  rotate: 270deg;
+}
