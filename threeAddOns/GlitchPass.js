@@ -32,7 +32,7 @@ class GlitchPass extends Pass {
 
     this.goWild = false;
     this.curF = 0;
-    this.generateTrigger();
+    // this.generateTrigger();
   }
 
   render(renderer, writeBuffer, readBuffer /*, deltaTime, maskActive */) {
@@ -60,7 +60,7 @@ class GlitchPass extends Pass {
       this.uniforms["distortion_y"].value = MathUtils.randFloat(0, 1);
       this.uniforms["seed_x"].value = MathUtils.randFloat(-0.3, 0.3);
       this.uniforms["seed_y"].value = MathUtils.randFloat(-0.3, 0.3);
-      this.curF += 0.3;
+      this.curF += 0.8;
     } else if (this.goWild == false) {
       this.uniforms["byp"].value = 1;
       this.curF += 0.08;
@@ -77,7 +77,7 @@ class GlitchPass extends Pass {
   }
 
   generateTrigger() {
-    this.randX = MathUtils.randInt(120, 240);
+    this.randX = 240;
   }
 
   generateHeightmap(dt_size) {

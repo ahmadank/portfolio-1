@@ -1,3 +1,18 @@
 .App {
   display: flex;
 }
+
+main {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+main::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
+}

@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Background />
-      <main style={{ position: "absolute", width: "100vw", height: "100vh" }}>
+      <main id="mainBody">
         <Welcome />
       </main>
       <SideBar />

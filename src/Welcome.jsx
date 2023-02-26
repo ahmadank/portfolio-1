@@ -68,7 +68,7 @@ function Welcome() {
 
   return (
     <motion.div
-      className="App"
+      className="WelcomeText"
       initial="hidden"
       animate="visible"
       variants={container}

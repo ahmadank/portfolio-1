@@ -60,7 +60,7 @@ function Background() {
     renderer.setSize(sizes.width, sizes.height);
     const composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
-    const filmPass = new FilmPass(1, 1, 2048, false);
+    const filmPass = new FilmPass(1, 1, 2048, true);
     const glitchPass = new GlitchPass();
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
@@ -71,7 +71,7 @@ function Background() {
     composer.addPass(bloomPass);
 
     composer.addPass(glitchPass);
-    // composer.addPass(filmPass);
+    composer.addPass(filmPass);
 
     const createPoints = () => {
       geometry = new THREE.BufferGeometry();
@@ -157,8 +157,8 @@ function Background() {
     };
 
     const animate = () => {
-      capsuleMesh.position.z += 0.0003;
-      capsuleMesh.instanceMatrix.needsUpdate = true;
+      // capsuleMesh.position.z += 0.0003;
+      camera.rotateZ(0.0001);
     };
 
     const updatePoint = () => {
@@ -202,6 +202,16 @@ function Background() {
       }
     };
 
+    const timeout = setTimeout(() => {
+      glitchPass.generateTrigger();
+      const time = setTimeout(() => {
+        composer.removePass(filmPass);
+      }, 100);
+      const time2 = setTimeout(() => {
+        composer.removePass(glitchPass);
+      }, 1500);
+    }, 2000);
+
     const render = () => {
       composer.render();
       updatetrailColor();
@@ -213,16 +223,21 @@ function Background() {
     addcapsuleMesh();
     render();
 
-    const doc = document.getElementsByClassName("App")[0];
+    const doc = document.querySelector("#mainBody");
     let prevScrollPos = doc.scrollTop;
 
     doc?.addEventListener("scroll", (event) => {
       const currentScrollPos = doc.scrollTop;
-
-      let mul = prevScrollPos < currentScrollPos ? 1 : -0.5;
-      camera.position.z = camera.position.z + 0.05 * mul;
-      camera.position.x = camera.position.x + 0.01 * mul;
-      camera.rotation.y = camera.position.y + 0.01 * mul;
+      let mul = prevScrollPos < currentScrollPos ? -1 : 1;
+      if (camera.position.z >= 43 && mul < 0) {
+        camera.position.z = camera.position.z + 0.05 * mul;
+        camera.rotation.x += 0.003;
+      } else if (mul > 0) {
+        camera.position.z = camera.position.z + 0.05 * mul;
+        camera.rotation.x -= 0.003;
+      }
+      // camera.position.x = camera.position.x + 0.01 * mul;
+      // camera.rotation.y = camera.position.y + 0.1 * mul;
 
       prevScrollPos = currentScrollPos;
     });
