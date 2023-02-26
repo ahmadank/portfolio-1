@@ -1,0 +1,17 @@
+.main {
+  position: absolute;
+  font-weight: 900;
+  font-size: 50px;
+  color: white;
+  margin-left: 5%;
+}
+
+.main h1 {
+  margin: 0;
+  height: fit-content;
+}
+
+.main p {
+  margin: 0;
+  height: fit-content;
+}

@@ -5,7 +5,7 @@ import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { FilmPass } from "three/addons/postprocessing/FilmPass.js";
 import { GlitchPass } from "../threeAddOns/GlitchPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
-
+import { ClearPass } from "three/addons/postprocessing/ClearPass.js";
 import styles from "./background.module.css";
 
 const setPosition = (array) => {
@@ -30,6 +30,7 @@ function Background() {
   const dummy = new THREE.Object3D();
   const color = new THREE.Color();
   const matrix = new THREE.Matrix4();
+  const colors = [0x000761, 0x440088, 0x9f45b0, 0xe54ed0];
 
   useEffect(() => {
     const sizes = {
@@ -37,6 +38,8 @@ function Background() {
       height: window.innerHeight,
     };
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x00000);
+
     const camera = new THREE.PerspectiveCamera(
       75,
       sizes.width / sizes.height,
@@ -46,13 +49,14 @@ function Background() {
     camera.position.z = 50;
     scene.add(camera);
     scene.add(new THREE.AmbientLight(0x404040));
-    const pointLight = new THREE.PointLight(0x3f7b9d, 5);
-    camera.add(pointLight);
+    colors.forEach((col) => {
+      const pointLight = new THREE.PointLight(col, 5);
+      camera.add(pointLight);
+    });
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
       antialias: true,
     });
-    renderer.setClearColor(0x000000, 0);
     renderer.setSize(sizes.width, sizes.height);
     const composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
@@ -119,10 +123,9 @@ function Background() {
       const outerRadius = 50;
       const innerRadius = 20;
       const tubeLength = 40;
-      const numCapsules = 100;
+      const numCapsules = 130;
       const geometry = new THREE.CapsuleGeometry(0.05, 30, 15, 8);
       const material = new THREE.MeshStandardMaterial({
-        color: 0x3f7b9d,
         side: THREE.DoubleSide,
       });
       capsuleMesh = new THREE.InstancedMesh(geometry, material, 100);
@@ -148,22 +151,13 @@ function Background() {
             .makeRotationFromQuaternion(quaternion)
             .setPosition(position)
         );
+        capsuleMesh.setColorAt(i, new THREE.Color(colors[i % 4]));
       }
       capsuleMesh.rotateX(40);
     };
 
     const animate = () => {
-      const time = Date.now();
-      for (let i = 0; i < 40; ++i) {
-        capsuleMesh.getMatrixAt(i, matrix);
-        matrix.decompose(dummy.position, dummy.rotation, dummy.scale);
-        dummy.position.x += 0.001;
-        // dummy.position.y = (i / 100000) * time;
-        // dummy.position.y += 0.002;
-        dummy.updateMatrix();
-        capsuleMesh.setMatrixAt(i, dummy.matrix);
-        // capsuleMesh.lookAt(camera);
-      }
+      capsuleMesh.position.z += 0.0003;
       capsuleMesh.instanceMatrix.needsUpdate = true;
     };
 

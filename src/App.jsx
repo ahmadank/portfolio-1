@@ -3,22 +3,16 @@ import "./App.css";
 import Background from "./Background";
 import LightMode from "./LightMode";
 import SideBar from "./SideBar";
+import Welcome from "./Welcome";
 function App() {
   const [lightMode, setLightMode] = useState(false);
-  // const changeColor = () => {
-  //   darkMode
-  //     ? (document.body.className = "light-mode")
-  //     : (document.body.className = "dark-mode");
-  //   document.body.style.setProperty(
-  //     "--cards",
-  //     darkMode ? "#3e3e28" : "#f88cfc"
-  //   );
-  //   //F79696
-  //   darkMode = !darkMode;
-  // };
+
   return (
     <div className="App">
       <Background />
+      <main style={{ position: "absolute", width: "100vw", height: "100vh" }}>
+        <Welcome />
+      </main>
       <SideBar />
       <LightMode lightMode={lightMode} setLightMode={setLightMode} />
     </div>

@@ -11,5 +11,15 @@
 }
 
 .text {
+  color: white;
+  font-size: 15px;
+  margin-left: 300%;
+  position: relative;
+  text-align: center;
+  height: 90%;
+}
+
+.text p {
   rotate: 270deg;
+  height: 15%;
 }
