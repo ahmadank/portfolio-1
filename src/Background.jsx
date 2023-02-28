@@ -5,7 +5,8 @@ import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { FilmPass } from "three/addons/postprocessing/FilmPass.js";
 import { GlitchPass } from "../threeAddOns/GlitchPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
-import { ClearPass } from "three/addons/postprocessing/ClearPass.js";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./background.module.css";
 
 const setPosition = (array) => {
@@ -27,9 +28,7 @@ function Background() {
   let mouse = new THREE.Vector3(0, 0, 1);
   let colorChangeCounter = 0;
   let capsuleMesh, geometry, material, positions;
-  const dummy = new THREE.Object3D();
   const color = new THREE.Color();
-  const matrix = new THREE.Matrix4();
   const colors = [0x000761, 0x440088, 0x9f45b0, 0xe54ed0];
 
   useEffect(() => {
@@ -60,13 +59,13 @@ function Background() {
     renderer.setSize(sizes.width, sizes.height);
     const composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
-    const filmPass = new FilmPass(1, 1, 2048, true);
+    const filmPass = new FilmPass(10, 10, 2048, true);
     const glitchPass = new GlitchPass();
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
-      1.5,
-      0.4,
-      0.85
+      20,
+      6,
+      6
     );
     composer.addPass(bloomPass);
 
@@ -223,23 +222,23 @@ function Background() {
     addcapsuleMesh();
     render();
 
-    const doc = document.querySelector("#mainBody");
-    let prevScrollPos = doc.scrollTop;
+    const doc = document.querySelector("#WelcomeText");
 
-    doc?.addEventListener("scroll", (event) => {
-      const currentScrollPos = doc.scrollTop;
-      let mul = prevScrollPos < currentScrollPos ? -1 : 1;
-      if (camera.position.z >= 43 && mul < 0) {
-        camera.position.z = camera.position.z + 0.05 * mul;
-        camera.rotation.x += 0.003;
-      } else if (mul > 0) {
-        camera.position.z = camera.position.z + 0.05 * mul;
-        camera.rotation.x -= 0.003;
-      }
-      // camera.position.x = camera.position.x + 0.01 * mul;
-      // camera.rotation.y = camera.position.y + 0.1 * mul;
+    const t1 = gsap.timeline();
+    t1.from(camera.rotation, { z: 0 })
+      .to(camera.position, { z: 43 })
+      .to(camera.rotation, {
+        x: 0.5,
+        duration: 10,
+      });
+    gsap.registerPlugin(ScrollTrigger);
 
-      prevScrollPos = currentScrollPos;
+    ScrollTrigger.create({
+      animation: t1,
+      trigger: doc,
+      start: "-100px top",
+      scrub: true,
+      markers: true,
     });
   }, []);
 

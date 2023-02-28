@@ -50,7 +50,7 @@ function LightMode({ lightMode, setLightMode }) {
         onClick={() => {
           setLightMode((old) => !old);
         }}
-        style={{ position: "fixed", marginLeft: "90%" }}
+        style={{ position: "fixed", marginLeft: "90%", top: 0 }}
         animate={lightMode ? "hidden" : "visible"}
       >
         <g id="LightMode">

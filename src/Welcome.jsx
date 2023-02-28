@@ -68,7 +68,7 @@ function Welcome() {
 
   return (
     <motion.div
-      className="WelcomeText"
+      id="WelcomeText"
       initial="hidden"
       animate="visible"
       variants={container}

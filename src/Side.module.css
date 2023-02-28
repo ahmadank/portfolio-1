@@ -8,10 +8,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  top: 0;
+  left: 0;
 }
 
 .text {
-  color: white;
   font-size: 15px;
   margin-left: 300%;
   position: relative;
