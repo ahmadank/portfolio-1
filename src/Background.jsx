@@ -8,6 +8,7 @@ import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js"
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./background.module.css";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 const setPosition = (array) => {
   for (let i = 0; i < 150; i++) {
@@ -30,6 +31,7 @@ function Background() {
   let capsuleMesh, geometry, material, positions;
   const color = new THREE.Color();
   const colors = [0x000761, 0x440088, 0x9f45b0, 0xe54ed0];
+  gsap.registerPlugin(ScrollTrigger);
 
   useEffect(() => {
     const sizes = {
@@ -45,7 +47,7 @@ function Background() {
       0.1,
       100
     );
-    camera.position.z = 50;
+    camera.position.z = 5;
     scene.add(camera);
     scene.add(new THREE.AmbientLight(0x404040));
     colors.forEach((col) => {
@@ -63,11 +65,12 @@ function Background() {
     const glitchPass = new GlitchPass();
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
-      20,
-      6,
-      6
+      1,
+      1,
+      0.5
     );
     composer.addPass(bloomPass);
+    // const controls = new OrbitControls(camera, renderer.domElement);
 
     composer.addPass(glitchPass);
     composer.addPass(filmPass);
@@ -157,7 +160,6 @@ function Background() {
 
     const animate = () => {
       // capsuleMesh.position.z += 0.0003;
-      camera.rotateZ(0.0001);
     };
 
     const updatePoint = () => {
@@ -212,6 +214,8 @@ function Background() {
     }, 2000);
 
     const render = () => {
+      // controls.update();
+
       composer.render();
       updatetrailColor();
       updatePoint();
@@ -222,7 +226,7 @@ function Background() {
     addcapsuleMesh();
     render();
 
-    const doc = document.querySelector("#WelcomeText");
+    const welcomeText = document.querySelector("#WelcomeText");
 
     const t1 = gsap.timeline();
     t1.from(camera.rotation, { z: 0 })
@@ -231,14 +235,33 @@ function Background() {
         x: 0.5,
         duration: 10,
       });
-    gsap.registerPlugin(ScrollTrigger);
 
     ScrollTrigger.create({
       animation: t1,
-      trigger: doc,
+      trigger: welcomeText,
       start: "-100px top",
       scrub: true,
-      markers: true,
+    });
+
+    const AboutMe = document.querySelector("#AboutMe");
+    const t2 = gsap.timeline();
+    t2.to(bloomPass, {
+      threshold: 0,
+      strength: 3,
+    })
+      .to(camera.position, {
+        z: 10,
+        y: 40,
+      })
+      .to(capsuleMesh.position, {
+        z: 100,
+      });
+    ScrollTrigger.create({
+      animation: t2,
+      trigger: AboutMe,
+      start: "top bottom",
+      end: "center end",
+      scrub: true,
     });
   }, []);
 

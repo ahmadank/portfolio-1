@@ -12,10 +12,7 @@ function App() {
       <Background />
       <main id="mainBody">
         <Welcome />
-        <div
-          id="About Me"
-          style={{ display: "flex", justifyContent: "center" }}
-        >
+        <div id="AboutMe" style={{ display: "flex", justifyContent: "center" }}>
           <div
             style={{
               width: "30%",
