@@ -31,6 +31,7 @@ function Background() {
   let capsuleMesh, geometry, material, positions;
   const color = new THREE.Color();
   const colors = [0x000761, 0x440088, 0x9f45b0, 0xe54ed0];
+  const dummy = new THREE.Object3D();
   gsap.registerPlugin(ScrollTrigger);
 
   useEffect(() => {
@@ -39,6 +40,8 @@ function Background() {
       height: window.innerHeight,
     };
     const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0xefd1b5, 0.035);
+
     scene.background = new THREE.Color(0x00000);
 
     const camera = new THREE.PerspectiveCamera(
@@ -157,9 +160,43 @@ function Background() {
       }
       capsuleMesh.rotateX(40);
     };
+    let stars;
+    const addStars = () => {
+      const geometry = new THREE.SphereGeometry(0.1, 64, 16);
+      const material = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+      });
 
+      stars = new THREE.InstancedMesh(geometry, material, 800);
+      scene.add(stars);
+      stars.position.x -= 20;
+      stars.position.y += 35;
+      for (let i = 0; i < 800; ++i) {
+        dummy.position.x = Math.random() * 40 - 2;
+        dummy.position.y = Math.random() * 40 - 2;
+        dummy.position.z = Math.random() * 40 - 2;
+
+        dummy.rotation.x = Math.random() * 2 - Math.PI;
+        dummy.rotation.y = Math.random() * 2 - Math.PI;
+        dummy.rotation.z = Math.random() * 2 - Math.PI;
+
+        dummy.updateMatrix();
+        stars.setMatrixAt(i, dummy.matrix);
+      }
+    };
+    addStars();
+    const matrix = new THREE.Matrix4();
     const animate = () => {
-      // capsuleMesh.position.z += 0.0003;
+      const time = Date.now();
+      for (let i = 0; i < 800; ++i) {
+        stars.getMatrixAt(i, matrix);
+        matrix.decompose(dummy.position, dummy.rotation, dummy.scale);
+        dummy.position.x += 0.001;
+        dummy.position.z += 0.001;
+        dummy.updateMatrix();
+        stars.setMatrixAt(i, dummy.matrix);
+      }
+      stars.instanceMatrix.needsUpdate = true;
     };
 
     const updatePoint = () => {
@@ -254,7 +291,7 @@ function Background() {
         y: 40,
       })
       .to(capsuleMesh.position, {
-        z: 100,
+        z: 40,
       });
     ScrollTrigger.create({
       animation: t2,

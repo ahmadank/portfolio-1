@@ -1,23 +1,24 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./App.css";
 import Background from "./Background";
 import LightMode from "./LightMode";
 import SideBar from "./SideBar";
 import Welcome from "./Welcome";
+import Experince from "./Experince";
+
 function App() {
   const [lightMode, setLightMode] = useState(false);
-
+  const mainBodyRef = useRef(null);
   return (
     <div className="App">
       <Background />
-      <main id="mainBody">
+      <main id="mainBody" ref={mainBodyRef}>
         <Welcome />
         <div id="AboutMe" style={{ display: "flex", justifyContent: "center" }}>
           <div
             style={{
               width: "30%",
               fontSize: "22px",
-              background: "rgba(37, 37, 37, 0.5)",
               padding: "10px",
               marginRight: "10px",
             }}
@@ -37,13 +38,13 @@ function App() {
             style={{
               width: "30%",
               fontSize: "22px",
-              background: "rgba(37, 37, 37, 0.5)",
               padding: "10px",
               marginLeft: "10px",
               marginRight: "15%",
             }}
           ></div>
         </div>
+        <Experince />
         <footer style={{ height: "1000px" }}></footer>
       </main>
       <SideBar />
