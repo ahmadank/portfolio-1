@@ -1,26 +1,33 @@
 .sideContainer {
-  width: 5%;
-  margin-left: 1%;
-  max-width: 30px;
+  width: 70px;
   height: 100%;
   position: fixed;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   top: 0;
   left: 0;
+  background: rgb(26, 26, 26);
 }
 
 .text {
   font-size: 15px;
-  margin-left: 300%;
   position: relative;
   text-align: center;
-  height: 90%;
+  height: 75%;
 }
 
-.text p {
-  rotate: 270deg;
-  height: 15%;
+.btn {
+  background-color: rgb(26, 26, 26);
+  height: 25%;
+  white-space: nowrap;
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn p {
+  transform: rotate(270deg);
 }

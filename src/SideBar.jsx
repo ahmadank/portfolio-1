@@ -4,25 +4,39 @@ import { IconButton } from "@mui/material";
 function SideBar() {
   return (
     <div className={styles.sideContainer}>
-      <div className={styles.text}>
-        <p>About Me</p> <br />
-        <p>Experince</p>
-        <br />
-        <p>Skills</p>
-        <br />
-        <p>Contact Me</p>
-        <br />
-      </div>
-      <div id="Logos">
-        <IconButton aria-label="LinkedIn">
-          <LinkedIn fontSize="large" sx={{ fill: "#0072b1" }} />
-        </IconButton>
-        <IconButton aria-label="Resume">
-          <Feed fontSize="large" sx={{ fill: "#0072b1" }} />
-        </IconButton>
-        <IconButton aria-label="Email">
-          <AlternateEmail fontSize="large" sx={{ fill: "#0072b1" }} />
-        </IconButton>
+      <div id="content">
+        <div className={styles.text}>
+          <div className={styles.btn}>
+            <p>About Me</p>
+          </div>
+          <div className={styles.btn}>
+            <p>Experince</p>
+          </div>
+          <div className={styles.btn}>
+            <p>Skills</p>
+          </div>
+          <div className={styles.btn}>
+            <p>Contact Me</p>
+          </div>
+        </div>
+        <div
+          id="Logos"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          <IconButton aria-label="LinkedIn">
+            <LinkedIn fontSize="large" sx={{ fill: "#0072b1" }} />
+          </IconButton>
+          <IconButton aria-label="Resume">
+            <Feed fontSize="large" sx={{ fill: "#0072b1" }} />
+          </IconButton>
+          <IconButton aria-label="Email">
+            <AlternateEmail fontSize="large" sx={{ fill: "#0072b1" }} />
+          </IconButton>
+        </div>
       </div>
     </div>
   );

@@ -9,11 +9,49 @@ main {
   height: 100vh;
   position: absolute;
   top: 0;
-  margin-left: 7%;
+  margin-left: 70px;
+  /* background-color: rgb(37, 37, 37); */
 }
 
 main::-webkit-scrollbar {
   /* WebKit */
   width: 0;
   height: 0;
+}
+
+.custom-shape-divider-top-1677704414 {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1677704414 svg {
+  position: relative;
+  display: block;
+  width: calc(130% + 1.3px);
+  height: 179px;
+}
+
+.custom-shape-divider-top-1677704414 .shape-fill {
+  fill: #ffffff;
+}
+
+.custom-shape-divider-bottom-1677707278 {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-bottom-1677707278 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 150px;
+}
+
+.custom-shape-divider-bottom-1677707278 .shape-fill {
+  fill: #000000;
 }
