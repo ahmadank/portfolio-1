@@ -38,7 +38,6 @@ function AboutMe() {
             fontSize: "22px",
             padding: "10px",
             marginRight: "10px",
-            width: "45vw",
             display: "flex",
           }}
         >
@@ -60,7 +59,6 @@ function AboutMe() {
             padding: "10px",
             marginLeft: "10px",
             marginRight: "15%",
-            width: "45vw",
             display: "flex",
           }}
         ></div>
