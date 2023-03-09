@@ -25,4 +25,22 @@ export const projects = [
     description: [],
     githubLink: "",
   },
+  {
+    title: "Covid",
+    image: "covid.png",
+    description: [],
+    githubLink: "",
+  },
+  {
+    title: "Covid",
+    image: "searchEngine.png",
+    description: [],
+    githubLink: "",
+  },
+  {
+    title: "QT",
+    image: "QT.png",
+    description: [],
+    githubLink: "",
+  },
 ];

@@ -159,7 +159,8 @@ function Experince() {
             marginLeft: "50px",
             display: "flex",
             height: "30vh",
-            overflow: "hidden",
+            overflowX: "scroll",
+            paddingRight: "100px",
           }}
         >
           {projects.map((project) => {
