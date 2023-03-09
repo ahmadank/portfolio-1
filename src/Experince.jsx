@@ -33,31 +33,31 @@ function Experince() {
       x: +1000,
     });
   }, []);
-  useEffect(() => {
-    const newText = hoveredExperince;
+  // useEffect(() => {
+  //   const newText = hoveredExperince;
 
-    const tl = gsap.timeline();
-    tl.to(textRef.current, {
-      duration: 0.4,
-      x: "-100%",
-      opacity: 0,
-      onComplete: () => {
-        textRef.current.innerHTML = newText;
-        gsap.fromTo(
-          textRef.current,
-          {
-            x: "100%",
-            opacity: 0,
-          },
-          {
-            duration: 0.3,
-            x: "0%",
-            opacity: 1,
-          }
-        );
-      },
-    });
-  }, [hoveredExperince]);
+  //   const tl = gsap.timeline();
+  //   tl.to(textRef.current, {
+  //     duration: 0.4,
+  //     x: "-100%",
+  //     opacity: 0,
+  //     onComplete: () => {
+  //       textRef.current.innerHTML = newText;
+  //       gsap.fromTo(
+  //         textRef.current,
+  //         {
+  //           x: "100%",
+  //           opacity: 0,
+  //         },
+  //         {
+  //           duration: 0.3,
+  //           x: "0%",
+  //           opacity: 1,
+  //         }
+  //       );
+  //     },
+  //   });
+  // }, [hoveredExperince]);
   useEffect(() => {
     let proxy = { skew: 0 },
       skewSetter = gsap.quickSetter("._experince_1cs5f_1", "skewY", "deg"),
