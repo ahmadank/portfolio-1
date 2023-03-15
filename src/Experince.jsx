@@ -17,7 +17,6 @@ function Experince() {
         trigger: "#WorkExperince",
         start: "top bottom",
         scrub: true,
-        markers: true,
       },
       x: -1000,
     });
@@ -28,7 +27,6 @@ function Experince() {
         trigger: "#PersonalExperince",
         start: "top bottom",
         scrub: true,
-        markers: true,
       },
       x: +1000,
     });
@@ -153,16 +151,7 @@ function Experince() {
         className={styles.title}
         ref={textRef}
       ></div> */}
-        <div
-          id="projects"
-          style={{
-            marginLeft: "50px",
-            display: "flex",
-            height: "30vh",
-            overflowX: "scroll",
-            paddingRight: "100px",
-          }}
-        >
+        <div className={styles.project}>
           {projects.map((project) => {
             return (
               <ExperinceCards

@@ -3,3 +3,16 @@
   font-weight: 900;
   white-space: nowrap;
 }
+
+.project {
+  margin-left: 50px;
+  display: flex;
+  height: 30vh;
+  overflow-x: scroll;
+  padding-right: 100px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.project::-webkit-scrollbar {
+  display: none;
+}

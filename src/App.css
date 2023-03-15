@@ -3,20 +3,12 @@
 }
 
 main {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   width: 100vw;
   height: 100vh;
   position: absolute;
   top: 0;
   margin-left: 70px;
   /* background-color: rgb(37, 37, 37); */
-}
-
-main::-webkit-scrollbar {
-  /* WebKit */
-  width: 0;
-  height: 0;
 }
 
 .custom-shape-divider-top-1677704414 {

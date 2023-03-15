@@ -32,7 +32,7 @@ export const projects = [
     githubLink: "",
   },
   {
-    title: "Covid",
+    title: "Search Engine",
     image: "searchEngine.png",
     description: [],
     githubLink: "",

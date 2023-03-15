@@ -6,6 +6,7 @@ import SideBar from "./SideBar";
 import Welcome from "./Welcome";
 import Experince from "./Experince";
 import AboutMe from "./AboutMe";
+import Skills from "./Skills";
 function App() {
   const [lightMode, setLightMode] = useState(false);
   const mainBodyRef = useRef(null);
@@ -20,6 +21,7 @@ function App() {
           style={{ display: "flex", justifyContent: "center" }}
         />
         <Experince />
+        <Skills />
         <footer style={{ height: "1000px" }}></footer>
       </main>
       <SideBar />

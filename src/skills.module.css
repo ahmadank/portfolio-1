@@ -1,0 +1,45 @@
+.orb {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  display: inline-block;
+  margin: 0 24.7px;
+  transition: all 0.2s ease-out;
+}
+
+.orb:hover {
+  transform: scale(1.2);
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.marquee {
+  padding: 10px 0 10px 0;
+  height: 200px;
+  border: 2px solid #eee;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+  margin: 200px auto;
+}
+
+.marqueeInner {
+  display: block;
+  width: 200%;
+  height: 45%;
+  position: relative;
+  animation: marquee 20s linear infinite;
+}
+
+.marqueeInner:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -100%;
+  }
+}
