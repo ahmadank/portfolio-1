@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 import { gsap } from "gsap";
 import styles from "./skills.module.css";
 // import styles from "./background.module.css";
@@ -18,6 +18,10 @@ function Skills() {
     "ts.jpeg",
     "haskell.png",
     "prolog.png",
+    "html.png",
+    "java.png",
+    "js.png",
+    "python.png",
   ];
 
   const frameworks = [
@@ -28,6 +32,10 @@ function Skills() {
     "jira.png",
     "jquery.png",
     "mongodb.png",
+    "graphql.png",
+    "postgre.png",
+    "kubernetes.png",
+    "vite.png",
     "next.png",
     "react.png",
     "xcode.png",
@@ -36,8 +44,26 @@ function Skills() {
     "kubernetes.png",
     "vite.png",
   ];
+
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        padding: "10px 0",
+        backgroundColor: "rgba(13, 13, 13, 1)",
+      }}
+    >
+      <div
+        style={{
+          width: "100vw",
+          borderStyle: "solid",
+          height: "0.1px",
+          margin: "0 0 10px 0",
+          borderColor: "black",
+        }}
+      ></div>
+      <div className={styles.title}>Languages</div>
       <div className={styles.language}>
         <div className={styles.skills}>
           <div className={styles.skillsInner}>
@@ -61,6 +87,10 @@ function Skills() {
             </span>
           </div>
         </div>
+      </div>
+
+      <div className={styles.title}>
+        Tools <br />& Frameworks
       </div>
       <div className={styles.framework}>
         <div className={styles.skills}>

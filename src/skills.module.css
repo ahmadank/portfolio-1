@@ -23,16 +23,28 @@
 
 .skills {
   padding: 10px 0 10px 0;
-  width: 80vw;
+  width: 90vw;
   overflow: hidden;
   box-sizing: border-box;
   position: relative;
-  margin-left: 20%;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+  color: white;
+  rotate: 270deg;
+  font-family: "Anton", sans-serif;
+  font-size: 30px;
+  text-align: center;
+  /* border-style: solid; */
 }
 
 .skillsInner {
   display: block;
-  width: 180%;
+  width: 200%;
   position: relative;
 }
 .language .skillsInner {
