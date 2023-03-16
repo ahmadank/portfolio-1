@@ -44,7 +44,9 @@ function Skills() {
     "Kubernetes.png",
     "Vite.png",
   ];
+
   const [hover, setHover] = useState(0);
+  const [hoverTitle, setHoverTitle] = useState("");
   return (
     <div
       style={{
@@ -75,11 +77,17 @@ function Skills() {
                     key={lang + index}
                     onMouseEnter={() => {
                       setHover(index);
+                      setHoverTitle(lang);
+                    }}
+                    onMouseLeave={() => {
+                      setHover(1000);
+                      setHoverTitle("");
                     }}
                   >
-                    {index == hover && (
+                    {index == hover && hoverTitle == lang && (
                       <div
                         style={{
+                          borderRadius: "50%",
                           position: "absolute",
                           textAlign: "center",
                           width: "100px",
@@ -104,8 +112,32 @@ function Skills() {
                   <div
                     className={styles.skill}
                     key={lang + "s" + index}
-                    onMouseEnter={(key) => {}}
+                    onMouseEnter={() => {
+                      setHover(index);
+                      setHoverTitle(lang);
+                    }}
+                    onMouseLeave={() => {
+                      setHover(1000);
+                      setHoverTitle("");
+                    }}
                   >
+                    {index == hover && hoverTitle == lang && (
+                      <div
+                        style={{
+                          borderRadius: "50%",
+                          position: "absolute",
+                          textAlign: "center",
+                          width: "100px",
+                          height: "100px",
+                          backgroundColor: "rgba(0,0,0,0.8)",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {lang.split(".")[0]}
+                      </div>
+                    )}
                     <img className={styles.img} src={lang}></img>
                   </div>
                 );
@@ -124,7 +156,35 @@ function Skills() {
             <span style={{ float: "left", width: "50%", height: "200px" }}>
               {frameworks.map((lang, index) => {
                 return (
-                  <div className={styles.skill} key={lang + "f" + index}>
+                  <div
+                    className={styles.skill}
+                    key={lang + "f" + index}
+                    onMouseEnter={() => {
+                      setHover(index);
+                      setHoverTitle(lang);
+                    }}
+                    onMouseLeave={() => {
+                      setHover(1000);
+                      setHoverTitle("");
+                    }}
+                  >
+                    {index == hover && hoverTitle == lang && (
+                      <div
+                        style={{
+                          borderRadius: "50%",
+                          position: "absolute",
+                          textAlign: "center",
+                          width: "100px",
+                          height: "100px",
+                          backgroundColor: "rgba(0,0,0,0.8)",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {lang.split(".")[0]}
+                      </div>
+                    )}
                     <img className={styles.img} src={lang}></img>
                   </div>
                 );
@@ -133,7 +193,35 @@ function Skills() {
             <span style={{ float: "left", width: "50%", height: "200px" }}>
               {frameworks.map((lang, index) => {
                 return (
-                  <div className={styles.skill} key={lang + "fs" + index}>
+                  <div
+                    className={styles.skill}
+                    key={lang + "fs" + index}
+                    onMouseEnter={() => {
+                      setHover(index);
+                      setHoverTitle(lang);
+                    }}
+                    onMouseLeave={() => {
+                      setHover(1000);
+                      setHoverTitle("");
+                    }}
+                  >
+                    {index == hover && hoverTitle == lang && (
+                      <div
+                        style={{
+                          borderRadius: "50%",
+                          position: "absolute",
+                          textAlign: "center",
+                          width: "100px",
+                          height: "100px",
+                          backgroundColor: "rgba(0,0,0,0.8)",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {lang.split(".")[0]}
+                      </div>
+                    )}
                     <img className={styles.img} src={lang}></img>
                   </div>
                 );
