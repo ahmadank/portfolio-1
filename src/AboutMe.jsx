@@ -45,11 +45,11 @@ function AboutMe() {
             Hi, my name is Ahmad and I am a software developer with experience
             in full stack development using technologies such as React, Node.js,
             and both SQL and non-SQL databases. I have also worked on building
-            native applications using languages such as C++, React Native,
-            Python, and Swift for various platforms including iOS, Android,
-            Windows, Linux, and MacOS. In addition, I have experience in
-            developing applications using Microsoft Dynamics, including
-            Sharepoint, PowerApps, PowerBi, and Power Automate.
+            native applications using skillss such as C++, React Native, Python,
+            and Swift for various platforms including iOS, Android, Windows,
+            Linux, and MacOS. In addition, I have experience in developing
+            applications using Microsoft Dynamics, including Sharepoint,
+            PowerApps, PowerBi, and Power Automate.
           </p>
         </div>
         <div

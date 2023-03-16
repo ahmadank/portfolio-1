@@ -1,45 +1,64 @@
-.orb {
+.skill {
   width: 100px;
   height: 100px;
   border-radius: 50px;
   display: inline-block;
   margin: 0 24.7px;
+  background-color: white;
   transition: all 0.2s ease-out;
 }
 
-.orb:hover {
+.img {
+  width: 100px;
+  border-radius: 50%;
+  height: 100px;
+  object-fit: contain;
+}
+
+.skill:hover {
   transform: scale(1.2);
   opacity: 0.5;
   cursor: pointer;
 }
 
-.marquee {
+.skills {
   padding: 10px 0 10px 0;
-  height: 200px;
-  border: 2px solid #eee;
+  width: 80vw;
   overflow: hidden;
   box-sizing: border-box;
   position: relative;
-  margin: 200px auto;
+  margin-left: 20%;
 }
 
-.marqueeInner {
+.skillsInner {
   display: block;
-  width: 200%;
-  height: 45%;
+  width: 180%;
   position: relative;
-  animation: marquee 20s linear infinite;
+}
+.language .skillsInner {
+  animation: skills 20s linear infinite;
 }
 
-.marqueeInner:hover {
+.framework .skillsInner {
+  animation: frameW 20s linear infinite;
+}
+.skillsInner:hover {
   animation-play-state: paused;
 }
 
-@keyframes marquee {
+@keyframes skills {
   0% {
     left: 0;
   }
   100% {
     left: -100%;
+  }
+}
+@keyframes frameW {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 0;
   }
 }
