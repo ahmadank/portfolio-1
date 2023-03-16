@@ -4,7 +4,6 @@
   border-radius: 50px;
   display: inline-block;
   margin: 0 24.7px;
-  background-color: white;
   transition: all 0.2s ease-out;
 }
 
@@ -17,7 +16,6 @@
 
 .skill:hover {
   transform: scale(1.2);
-  opacity: 0.5;
   cursor: pointer;
 }
 
@@ -53,9 +51,6 @@
 
 .framework .skillsInner {
   animation: frameW 20s linear infinite;
-}
-.skillsInner:hover {
-  animation-play-state: paused;
 }
 
 @keyframes skills {

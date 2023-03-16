@@ -22,10 +22,10 @@ function App() {
         />
         <Experince />
         <Skills />
-        <footer style={{ height: "1000px" }}></footer>
+        {/* <footer style={{ height: "1000px" }}></footer> */}
       </main>
       <SideBar />
-      <LightMode lightMode={lightMode} setLightMode={setLightMode} />
+      {/* <LightMode lightMode={lightMode} setLightMode={setLightMode} /> */}
     </div>
   );
 }

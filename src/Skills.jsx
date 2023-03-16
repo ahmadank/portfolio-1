@@ -4,47 +4,47 @@ import styles from "./skills.module.css";
 // import styles from "./background.module.css";
 function Skills() {
   const skills = [
-    "c.png",
-    "c++.png",
-    "css.png",
-    "html.png",
-    "java.png",
-    "js.png",
-    "python.png",
-    "ruby.png",
-    "salesforce.jpeg",
-    "sql.png",
-    "swift.png",
-    "ts.jpeg",
-    "haskell.png",
-    "prolog.png",
-    "html.png",
-    "java.png",
-    "js.png",
-    "python.png",
+    "C.png",
+    "C++.png",
+    "CSS.png",
+    "HTML.png",
+    "Java.png",
+    "JavaScript.png",
+    "Python.png",
+    "Ruby.png",
+    "Apex.jpeg",
+    "SQL.png",
+    "Swift.png",
+    "TypeScript.jpeg",
+    "Haskell.png",
+    "Prolog.png",
+    "HTML.png",
+    "Java.png",
+    "JavaScript.png",
+    "Python.png",
   ];
 
   const frameworks = [
-    "azure.png",
-    "github.png",
-    "graphql.png",
-    "jenkins.png",
-    "jira.png",
-    "jquery.png",
-    "mongodb.png",
-    "graphql.png",
-    "postgre.png",
-    "kubernetes.png",
-    "vite.png",
-    "next.png",
-    "react.png",
-    "xcode.png",
-    "graphql.png",
-    "postgre.png",
-    "kubernetes.png",
-    "vite.png",
+    "Azure.png",
+    "Github.png",
+    "GraphQL.png",
+    "Jenkins.png",
+    "Jira.png",
+    "Jquery.png",
+    "MongoDB.png",
+    "GraphQL.png",
+    "PostgreSQL.png",
+    "Kubernetes.png",
+    "Vite.png",
+    "NextJS.png",
+    "React.png",
+    "Xcode.png",
+    "GraphQL.png",
+    "PostgreSQL.png",
+    "Kubernetes.png",
+    "Vite.png",
   ];
-
+  const [hover, setHover] = useState(0);
   return (
     <div
       style={{
@@ -68,18 +68,44 @@ function Skills() {
         <div className={styles.skills}>
           <div className={styles.skillsInner}>
             <span style={{ float: "left", width: "50%", height: "200px" }}>
-              {skills.map((lang) => {
+              {skills.map((lang, index) => {
                 return (
-                  <div className={styles.skill}>
+                  <div
+                    className={styles.skill}
+                    key={lang + index}
+                    onMouseEnter={() => {
+                      setHover(index);
+                    }}
+                  >
+                    {index == hover && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          textAlign: "center",
+                          width: "100px",
+                          height: "100px",
+                          backgroundColor: "rgba(0,0,0,0.8)",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {lang.split(".")[0]}
+                      </div>
+                    )}
                     <img className={styles.img} src={lang}></img>
                   </div>
                 );
               })}
             </span>
             <span style={{ float: "left", width: "50%", height: "200px" }}>
-              {skills.map((lang) => {
+              {skills.map((lang, index) => {
                 return (
-                  <div className={styles.skill}>
+                  <div
+                    className={styles.skill}
+                    key={lang + "s" + index}
+                    onMouseEnter={(key) => {}}
+                  >
                     <img className={styles.img} src={lang}></img>
                   </div>
                 );
@@ -96,18 +122,18 @@ function Skills() {
         <div className={styles.skills}>
           <div className={styles.skillsInner}>
             <span style={{ float: "left", width: "50%", height: "200px" }}>
-              {frameworks.map((lang) => {
+              {frameworks.map((lang, index) => {
                 return (
-                  <div className={styles.skill}>
+                  <div className={styles.skill} key={lang + "f" + index}>
                     <img className={styles.img} src={lang}></img>
                   </div>
                 );
               })}
             </span>
             <span style={{ float: "left", width: "50%", height: "200px" }}>
-              {frameworks.map((lang) => {
+              {frameworks.map((lang, index) => {
                 return (
-                  <div className={styles.skill}>
+                  <div className={styles.skill} key={lang + "fs" + index}>
                     <img className={styles.img} src={lang}></img>
                   </div>
                 );
